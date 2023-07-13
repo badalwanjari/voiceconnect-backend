@@ -3,6 +3,7 @@ const authController = require('./controllers/auth-controller');
 const activateController = require('./controllers/activate-controller');
 const authMiddleware = require('./middlewares/auth-middleware');
 const roomsController = require('./controllers/rooms-controller');
+const { json } = require('express');
 
 router.post('/api/send-otp', authController.sendOtp);
 router.post('/api/verify-otp', authController.verifyOtp);
@@ -12,5 +13,6 @@ router.post('/api/logout', authMiddleware, authController.logout);
 router.post('/api/rooms', authMiddleware, roomsController.create);
 router.get('/api/rooms', authMiddleware, roomsController.index);
 router.get('/api/rooms/:roomId', authMiddleware, roomsController.show);
+router.get('/test', (req, res)=>res.send({message: "Hello Jane"}));
 
 module.exports = router;

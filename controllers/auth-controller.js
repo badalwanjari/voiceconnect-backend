@@ -82,8 +82,10 @@ class AuthController {
     }
 
     async refresh(req, res) {
+    
         // get refresh token from cookie
         const { refreshToken: refreshTokenFromCookie } = req.cookies;
+        console.log("Token: ", refreshTokenFromCookie)
         // check if token is valid
         let userData;
         try {
@@ -91,7 +93,7 @@ class AuthController {
                 refreshTokenFromCookie
             );
         } catch (err) {
-            return res.status(401).json({ message: 'Invalid Token' });
+            return res.status(401).json({ message: 'Invalid Token', err });
         }
         // Check if token is in db
         try {
@@ -102,7 +104,7 @@ class AuthController {
             );
             console.log(token)
             if (!token) {
-                return res.status(401).json({ message: 'Invalid token' });
+                return res.status(401).json({ message: 'Invalid token' , err});
             }
         } catch (err) {
             return res.status(500).json({ message: 'Internal error' });

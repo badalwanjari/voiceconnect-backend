@@ -2,7 +2,9 @@ const tokenService = require('../services/token-service');
 
 module.exports = async function (req, res, next) {
     try {
+        console.log("Hello From Auth")
         const { accessToken } = req.cookies;
+        console.log("accesstoken : " , accessToken)
         if (!accessToken) {
             throw new Error();
         }
